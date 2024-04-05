@@ -1,5 +1,6 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 import pandas as pd
 
 # read data
@@ -18,7 +19,10 @@ y = y[X.index]
 # split data into training and testing
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-# train model
-clf = LogisticRegression(random_state=0, max_iter=5000).fit(x_train, y_train)
-# score on test data
+# train model using balanced class weights, max_iter=5000 for convergence
+clf = LogisticRegression(random_state=0, max_iter=5000, class_weight='balanced').fit(x_train, y_train)
+# accuracy based on test
 print(clf.score(x_test, y_test))
+# classification report based on test
+pred = clf.predict(x_test)
+print(classification_report(y_test, pred))
