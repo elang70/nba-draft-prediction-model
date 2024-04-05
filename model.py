@@ -19,6 +19,6 @@ y = y[X.index]
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # train model
-clf = LogisticRegression(random_state=0).fit(x_train, y_train)
+clf = LogisticRegression(random_state=0, max_iter=5000).fit(x_train, y_train)
 # score on test data
 print(clf.score(x_test, y_test))
