@@ -4,7 +4,7 @@ from sklearn.metrics import classification_report
 import pandas as pd
 
 # read data
-df = pd.read_csv('nba_draft_combine_all_years.csv')
+df = pd.read_csv('nba-draft-prediction-model/data/nba_draft_combine_all_years.csv')
 # drop useless columns
 df.drop(['Player', 'Year', 'Unnamed: 0'], axis=1, inplace=True)
 # make draft pick column binary
