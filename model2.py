@@ -1,11 +1,14 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
 # read data
-df = pd.read_csv('nba-draft-prediction-model/data/player_data_with_positions.csv')
+df = pd.read_csv('data/player_data_with_positions_reduced.csv')
 
 # drop useless columns
 df.drop(['Player', 'Year', 'Unnamed: 0'], axis=1, inplace=True)
@@ -26,7 +29,7 @@ for position in positions:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
     # initialize logistic regression model
-    logistic_model = LogisticRegression()
+    logistic_model = LogisticRegression(random_state=0, max_iter=5000, class_weight='balanced')
     
     # train the model
     logistic_model.fit(X_train, y_train)
@@ -37,3 +40,5 @@ for position in positions:
     # evaluate the model
     print(f"Classification Report for {position}:")
     print(classification_report(y_test, y_pred))
+    ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred)).plot()
+    plt.show()
