@@ -34,7 +34,7 @@ import joblib
 df = pd.read_csv('data/nba-players.csv')
 
 # drop useless columns
-df.drop(['name'], axis=1, inplace=True)
+df.drop(['name', 'Unnamed: 0'], axis=1, inplace=True)
 
 # split data into features and target
 X = df.drop('target_5yrs', axis=1)
@@ -84,6 +84,7 @@ print(clf.score(x_test, y_test))
 pred = clf.predict(x_test)
 print(classification_report(y_test, pred))
 ConfusionMatrixDisplay(confusion_matrix(y_test, pred)).plot()
+plt.title('Logistic Regression Confusion Matrix')
 plt.show()
 
 coefficients = clf.coef_[0]
@@ -91,4 +92,5 @@ coefficients = clf.coef_[0]
 feature_importance = pd.DataFrame({'Feature': X.columns, 'Importance': np.abs(coefficients)})
 feature_importance = feature_importance.sort_values('Importance', ascending=True)
 feature_importance.plot(x='Feature', y='Importance', kind='barh', figsize=(10, 6))
+plt.title('Logistic Regression Feature Importance')
 plt.show()
