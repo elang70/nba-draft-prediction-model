@@ -61,3 +61,4 @@ pred = clf.predict(x_test)
 print(classification_report(y_test, pred))
 ConfusionMatrixDisplay(confusion_matrix(y_test, pred)).plot()
 plt.show()
+

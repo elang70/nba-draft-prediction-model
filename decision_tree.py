@@ -85,7 +85,7 @@ coefficients = dt.feature_importances_
 feature_importance = pd.DataFrame({'Feature': X.columns, 'Importance': np.abs(coefficients)})
 
 # Sort the dataframe by importance in descending order
-feature_importance = feature_importance.sort_values('Importance', ascending=False)
+feature_importance = feature_importance.sort_values('Importance', ascending=True)
 
 # Plot the feature importance
 feature_importance.plot(x='Feature', y='Importance', kind='barh', figsize=(10, 6))
