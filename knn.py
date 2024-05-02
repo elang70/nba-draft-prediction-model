@@ -25,7 +25,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 def objective(trial):
     # Define the search space for hyperparameters
-    neighbors = trial.suggest_int('n_neighbors', 1, 10)
+    neighbors = trial.suggest_int('n_neighbors', 1, 16)
     weights = trial.suggest_categorical('weights', ['uniform', 'distance'])
 
     # Create the Decision Tree model with the specified hyperparameters
@@ -43,7 +43,8 @@ def objective(trial):
     precision = precision_score(y_test, y_pred)
     recall = recall_score(y_test, y_pred)
     
-    avg = (accuracy + precision + recall) / 3
+    # avg = (accuracy + precision + recall) / 3
+    avg = (precision + recall) / 2
 
     return avg
 
